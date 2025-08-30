@@ -22,7 +22,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.ADMIN_TOKEN }}
+        ssh-key: ${{ secrets.DEPLOY_KEY }}
         fetch-depth: 0
 
     - name: Configure Git
@@ -65,7 +65,7 @@ jobs:
     - name: Create GitHub Release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: v${{ steps.version.outputs.new_version }}
         release_name: Release v${{ steps.version.outputs.new_version }}

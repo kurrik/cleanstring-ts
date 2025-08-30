@@ -185,21 +185,18 @@ Releases are automated via GitHub Actions. Only the repository owner can create 
 
 #### Prerequisites (one-time setup)
 
-1. **Create Fine-Grained Personal Access Token**:
-   - Go to GitHub.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens
-   - Click "Generate new token"
-   - Set Resource owner to your account
-   - Set Repository access to "Selected repositories" and choose this repo
-   - Set expiration (recommend 1 year)
-   - **Required permissions**:
-     - Contents: Read and write
-     - Metadata: Read
-     - Pull requests: Read
-     - Actions: Read
+1. **Create Deploy Key with Write Access**:
+   - Generate SSH key pair: `ssh-keygen -t ed25519 -f release_key -N ""`
+   - Go to repository → Settings → Deploy keys
+   - Click "Add deploy key"
+   - Title: "Release Automation"
+   - Key: Contents of `release_key.pub`
+   - ✅ Check "Allow write access"
+   - Configure to bypass repository rules (Settings → Rules)
 
 2. **Add Repository Secrets**:
    - Go to repository → Settings → Secrets and variables → Actions
-   - Add `ADMIN_TOKEN` with your personal access token
+   - Add `DEPLOY_KEY` with contents of private key file (`release_key`)
    - Add `NPM_TOKEN` with your npm automation token
 
 #### Creating a Release
