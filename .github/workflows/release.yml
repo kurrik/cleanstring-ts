@@ -17,6 +17,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     if: github.actor == github.repository_owner
+    permissions:
+      contents: write
     
     steps:
     - name: Checkout code
