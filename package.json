@@ -1,10 +1,12 @@
 {
   "name": "cleanstring-ts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Clean multiline TypeScript string literals",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -15,7 +17,13 @@
     "ci": "npm run lint && npm run check && npm run test",
     "prepublishOnly": "npm run build && npm run test && npm run check"
   },
-  "keywords": ["string", "multiline", "clean", "typescript", "formatting"],
+  "keywords": [
+    "string",
+    "multiline",
+    "clean",
+    "typescript",
+    "formatting"
+  ],
   "author": "Arne Roomann-Kurrik",
   "license": "MIT",
   "repository": {
