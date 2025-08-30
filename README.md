@@ -1,4 +1,5 @@
 # cleanstring-ts
+
 [![npm version](https://badge.fury.io/js/cleanstring-ts.svg)](https://www.npmjs.com/package/cleanstring-ts)
 
 Clean multiline TypeScript string literals by removing leading/trailing blank lines and stripping pipe prefixes.
