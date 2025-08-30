@@ -23,23 +23,10 @@ const result = cleanstring(`
 // Result: "Any literal\nwhich needs to be split\non multiple lines for readability."
 
 // Custom prefix example
-const markdown = cleanstring(
-  `
-    >This is a markdown quote
-    >with multiple lines
-`,
-  { prefix: '>' },
-);
-// Result: "This is a markdown quote\nwith multiple lines"
-
-// Custom prefix with trailing space example (note the prefix contains a space)
-const markdown = cleanstring(
-  `
+const markdown = cleanstring(`
     > This is a markdown quote
     > with multiple lines
-`,
-  { prefix: '> ' },
-);
+`, { prefix: '> ' });
 // Result: "This is a markdown quote\nwith multiple lines"
 ```
 
@@ -79,62 +66,22 @@ const sql = cleanstring(`
 
 ```typescript
 // Markdown quotes with > prefix
-const quote = cleanstring(
-  `
-    > This is a quote
-    > from someone famous
-`,
-  { prefix: '>' },
-);
-// Result: " This is a quote\n from someone famous"
-
-// Shell comments with # prefix
-const script = cleanstring(
-  `
-    # This is a shell script
-    # with multiple comment lines
-`,
-  { prefix: '#' },
-);
-// Result: " This is a shell script\n with multiple comment lines"
-
-// List items with * prefix
-const list = cleanstring(
-  `
-    * First item
-    * Second item
-    * Third item
-`,
-  { prefix: '*' },
-);
-// Result: " First item\n Second item\n Third item"
+const quote = cleanstring(`
+    >This is a quote
+    >from someone famous
+`, { prefix: '>' });
+// Result: "This is a quote\nfrom someone famous"
 ```
 
 ### Multi-character prefixes for space stripping
 
-If you want to strip a space after the prefix (reproducing the old behavior), include the space as part of the prefix:
-
 ```typescript
 // Using "> " (greater than + space) strips the space after >
-const cleanQuote = cleanstring(
-  `
+const cleanQuote = cleanstring(`
     > This is a quote
     > with multiple lines
-`,
-  { prefix: '> ' },
-);
+`, { prefix: '> ' });
 // Result: "This is a quote\nwith multiple lines"
-
-// Using "| " (pipe + space) strips the space after |
-const cleanCode = cleanstring(
-  `
-    | function example() {
-    |   return 'hello world';
-    | }
-`,
-  { prefix: '| ' },
-);
-// Result: "function example() {\n  return 'hello world';\n}"
 ```
 
 ### Mixed content with prefix
@@ -150,6 +97,8 @@ const script = cleanstring(`
 ```
 
 ### Without prefixes
+
+Note that leading/trailing blank lines are still stripped.
 
 ```typescript
 const text = cleanstring(`
