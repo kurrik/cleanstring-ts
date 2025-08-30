@@ -161,7 +161,8 @@ const text = cleanstring(`
 // Result: "    This is a multiline string\n    with some content"
 ```
 
-## Development
+<details>
+<summary>Development</summary>
 
 ### Common commands
 
@@ -219,6 +220,8 @@ The automated release process:
 4. **Creates and pushes git tag**
 5. **Creates GitHub release**
 6. **Automatically publishes to npm** (triggered by release creation)
+
+</details>
 
 ## License
 
