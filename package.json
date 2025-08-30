@@ -1,5 +1,5 @@
 {
-  "name": "cleanstring-ts",
+  "name": "cleanstring",
   "version": "1.0.0",
   "description": "Clean multiline TypeScript string literals",
   "main": "dist/index.js",
