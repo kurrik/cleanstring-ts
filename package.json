@@ -1,6 +1,6 @@
 {
   "name": "cleanstring-ts",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Clean multiline TypeScript string literals",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
