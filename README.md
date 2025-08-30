@@ -161,8 +161,10 @@ const text = cleanstring(`
 // Result: "    This is a multiline string\n    with some content"
 ```
 
+## Development
+
 <details>
-<summary>Development</summary>
+<summary>Instructions for working on the library...</summary>
 
 ### Common commands
 
