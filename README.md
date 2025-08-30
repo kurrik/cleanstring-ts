@@ -25,10 +25,20 @@ const result = cleanstring(`
 // Custom prefix example
 const markdown = cleanstring(
   `
+    >This is a markdown quote
+    >with multiple lines
+`,
+  { prefix: '>' },
+);
+// Result: "This is a markdown quote\nwith multiple lines"
+
+// Custom prefix with trailing space example (note the prefix contains a space)
+const markdown = cleanstring(
+  `
     > This is a markdown quote
     > with multiple lines
 `,
-  { prefix: '>' },
+  { prefix: '> ' },
 );
 // Result: "This is a markdown quote\nwith multiple lines"
 ```

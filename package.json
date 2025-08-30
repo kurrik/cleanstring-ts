@@ -4,7 +4,9 @@
   "description": "Clean multiline TypeScript string literals",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -15,7 +17,13 @@
     "ci": "npm run lint && npm run check && npm run test",
     "prepublishOnly": "npm run build && npm run test && npm run check"
   },
-  "keywords": ["string", "multiline", "clean", "typescript", "formatting"],
+  "keywords": [
+    "string",
+    "multiline",
+    "clean",
+    "typescript",
+    "formatting"
+  ],
   "author": "Arne Roomann-Kurrik",
   "license": "MIT",
   "repository": {
@@ -30,5 +38,6 @@
     "prettier": "^3.6.2",
     "ts-jest": "^29.2.2",
     "typescript": "^5.5.3"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
