@@ -28,6 +28,6 @@
   },
   "files": {
     "include": ["src/**/*", "tests/**/*", "*.js", "*.ts", "*.json"],
-    "ignore": ["dist/**/*", "node_modules/**/*"]
+    "ignore": ["dist/**/*", "node_modules/**/*", ".claude/**/*"]
   }
 }
