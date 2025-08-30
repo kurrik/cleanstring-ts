@@ -21,10 +21,13 @@ const result = cleanstring(`
 // Result: "Any literal\nwhich needs to be split\non multiple lines for readability."
 
 // Custom prefix example
-const markdown = cleanstring(`
+const markdown = cleanstring(
+  `
     > This is a markdown quote
     > with multiple lines
-`, { prefix: '>' });
+`,
+  { prefix: '>' },
+);
 // Result: "This is a markdown quote\nwith multiple lines"
 ```
 
@@ -62,25 +65,34 @@ const sql = cleanstring(`
 
 ```typescript
 // Markdown quotes with > prefix
-const quote = cleanstring(`
+const quote = cleanstring(
+  `
     > This is a quote
     > from someone famous
-`, { prefix: '>' });
+`,
+  { prefix: '>' },
+);
 // Result: "This is a quote\nfrom someone famous"
 
-// Shell comments with # prefix  
-const script = cleanstring(`
+// Shell comments with # prefix
+const script = cleanstring(
+  `
     # This is a shell script
     # with multiple comment lines
-`, { prefix: '#' });
+`,
+  { prefix: '#' },
+);
 // Result: "This is a shell script\nwith multiple comment lines"
 
 // List items with * prefix
-const list = cleanstring(`
+const list = cleanstring(
+  `
     * First item
     * Second item
     * Third item
-`, { prefix: '*' });
+`,
+  { prefix: '*' },
+);
 // Result: "First item\nSecond item\nThird item"
 ```
 
@@ -106,6 +118,35 @@ const text = cleanstring(`
 
 `);
 // Result: "    This is a multiline string\n    with some content"
+```
+
+## Development
+
+### Common commands
+
+```bash
+# Run tests
+npm test
+
+# Run linting and formatting checks
+npm run ci
+
+# Build the project
+npm run build
+
+# Format code
+npm run format
+```
+
+### Publishing
+
+```bash
+# Update version and publish
+npm version patch  # 1.0.0 -> 1.0.1
+npm version minor  # 1.0.1 -> 1.1.0
+npm version major  # 1.1.0 -> 2.0.0
+
+npm publish
 ```
 
 ## License
