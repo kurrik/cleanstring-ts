@@ -131,7 +131,9 @@ describe('cleanstring', () => {
           > with multiple lines
           > and proper formatting
       `;
-      expect(cleanstring(input, { prefix: '>' })).toBe('This is a quote\nwith multiple lines\nand proper formatting');
+      expect(cleanstring(input, { prefix: '>' })).toBe(
+        'This is a quote\nwith multiple lines\nand proper formatting',
+      );
     });
 
     test('handles # prefix for shell comments', () => {
@@ -174,7 +176,9 @@ describe('cleanstring', () => {
           unprefixed line
           > another prefixed line
       `;
-      expect(cleanstring(input, { prefix: '>' })).toBe('prefixed line\n          unprefixed line\nanother prefixed line');
+      expect(cleanstring(input, { prefix: '>' })).toBe(
+        'prefixed line\n          unprefixed line\nanother prefixed line',
+      );
     });
 
     test('backward compatibility - no options defaults to pipe', () => {
