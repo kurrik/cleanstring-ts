@@ -9,6 +9,7 @@ cleanstring-ts is a TypeScript library that cleans multiline string literals by 
 ## Architecture
 
 The library has a simple structure:
+
 - `src/index.ts` - Main implementation with `get()` function and helper `parseLine()`
 - `tests/index.test.ts` - Comprehensive Jest test suite
 - Single function API that processes strings line-by-line
@@ -42,11 +43,13 @@ npm run prepublishOnly
 ## Testing
 
 Run single test file:
+
 ```bash
 npm test -- tests/index.test.ts
 ```
 
 The test suite covers:
+
 - Empty/null inputs
 - Leading/trailing whitespace removal
 - Pipe prefix stripping
@@ -56,6 +59,7 @@ The test suite covers:
 ## Publishing
 
 The package is configured for npm publishing with:
+
 - TypeScript declarations generated in `dist/`
 - Only `dist/` directory included in published package
 - Pre-publish hooks run build, tests, and linting

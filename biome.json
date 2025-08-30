@@ -27,7 +27,7 @@
     }
   },
   "files": {
-    "include": ["src/**/*", "tests/**/*", "*.js", "*.ts", "*.json"],
+    "include": ["src/**/*", "tests/**/*", "*.js", "*.ts", "*.json", "README.md"],
     "ignore": ["dist/**/*", "node_modules/**/*", ".claude/**/*"]
   }
 }
