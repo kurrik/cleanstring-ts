@@ -63,17 +63,13 @@ jobs:
         git push origin "v$NEW_VERSION"
 
     - name: Create GitHub Release
-      uses: actions/create-release@v1
+      run: |
+        gh release create "v${{ steps.version.outputs.new_version }}" \
+          --title "Release v${{ steps.version.outputs.new_version }}" \
+          --notes "## Changes
+
+        See the [changelog](https://github.com/${{ github.repository }}/compare/v${{ steps.version.outputs.new_version }}...HEAD) for details.
+        
+        **Full Changelog**: https://github.com/${{ github.repository }}/commits/v${{ steps.version.outputs.new_version }}"
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ steps.version.outputs.new_version }}
-        release_name: Release v${{ steps.version.outputs.new_version }}
-        draft: false
-        prerelease: false
-        body: |
-          ## Changes
-          
-          See the [changelog](https://github.com/${{ github.repository }}/compare/v${{ steps.version.outputs.new_version }}...HEAD) for details.
-          
-          **Full Changelog**: https://github.com/${{ github.repository }}/commits/v${{ steps.version.outputs.new_version }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
