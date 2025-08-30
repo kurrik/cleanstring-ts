@@ -75,3 +75,8 @@ jobs:
         **Full Changelog**: https://github.com/${{ github.repository }}/commits/v${{ steps.version.outputs.new_version }}"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Trigger npm publish
+      run: gh workflow run publish.yml
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
