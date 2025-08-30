@@ -105,7 +105,7 @@ const text = cleanstring(`
     with some content
 
 `);
-// Result: "This is a multiline string\nwith some content"
+// Result: "    This is a multiline string\n    with some content"
 ```
 
 ## License
