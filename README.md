@@ -25,10 +25,20 @@ const result = cleanstring(`
 // Custom prefix example
 const markdown = cleanstring(
   `
+    >This is a markdown quote
+    >with multiple lines
+`,
+  { prefix: '>' },
+);
+// Result: "This is a markdown quote\nwith multiple lines"
+
+// Custom prefix with trailing space example (note the prefix contains a space)
+const markdown = cleanstring(
+  `
     > This is a markdown quote
     > with multiple lines
 `,
-  { prefix: '>' },
+  { prefix: '> ' },
 );
 // Result: "This is a markdown quote\nwith multiple lines"
 ```
@@ -44,9 +54,11 @@ const cleanstring = require('cleanstring-ts');
 The `cleanstring()` function processes multiline strings by:
 
 1. **Removing leading blank lines** - Any whitespace-only lines at the start are stripped
-2. **Stripping pipe prefixes** - Lines with whitespace followed by `|` have the prefix removed
+2. **Stripping prefixes** - Lines with whitespace followed by a prefix character (default `|`) have the prefix removed, **preserving all content after the prefix**
 3. **Removing trailing blank lines** - Any whitespace-only lines at the end are stripped
 4. **Preserving internal structure** - Whitespace lines between content are maintained
+
+**Important**: Content after the prefix is preserved exactly as-is. If you want to strip a space after the prefix, include the space as part of the prefix (e.g., `{ prefix: '> ' }` instead of `{ prefix: '>' }`).
 
 ## Examples
 
@@ -74,7 +86,7 @@ const quote = cleanstring(
 `,
   { prefix: '>' },
 );
-// Result: "This is a quote\nfrom someone famous"
+// Result: " This is a quote\n from someone famous"
 
 // Shell comments with # prefix
 const script = cleanstring(
@@ -84,7 +96,7 @@ const script = cleanstring(
 `,
   { prefix: '#' },
 );
-// Result: "This is a shell script\nwith multiple comment lines"
+// Result: " This is a shell script\n with multiple comment lines"
 
 // List items with * prefix
 const list = cleanstring(
@@ -95,7 +107,34 @@ const list = cleanstring(
 `,
   { prefix: '*' },
 );
-// Result: "First item\nSecond item\nThird item"
+// Result: " First item\n Second item\n Third item"
+```
+
+### Multi-character prefixes for space stripping
+
+If you want to strip a space after the prefix (reproducing the old behavior), include the space as part of the prefix:
+
+```typescript
+// Using "> " (greater than + space) strips the space after >
+const cleanQuote = cleanstring(
+  `
+    > This is a quote
+    > with multiple lines
+`,
+  { prefix: '> ' },
+);
+// Result: "This is a quote\nwith multiple lines"
+
+// Using "| " (pipe + space) strips the space after |
+const cleanCode = cleanstring(
+  `
+    | function example() {
+    |   return 'hello world';
+    | }
+`,
+  { prefix: '| ' },
+);
+// Result: "function example() {\n  return 'hello world';\n}"
 ```
 
 ### Mixed content with prefix

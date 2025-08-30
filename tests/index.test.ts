@@ -12,23 +12,23 @@ describe('cleanstring', () => {
 
   test('removes leading whitespace lines', () => {
     const input = `
-        
+
     hello world`;
     expect(cleanstring(input)).toBe('    hello world');
   });
 
   test('removes trailing whitespace lines', () => {
     const input = `hello world
-    
+
         `;
     expect(cleanstring(input)).toBe('hello world');
   });
 
   test('removes both leading and trailing whitespace lines', () => {
     const input = `
-        
+
     hello world
-    
+
         `;
     expect(cleanstring(input)).toBe('    hello world');
   });
@@ -61,7 +61,7 @@ describe('cleanstring', () => {
   });
 
   test('handles tabs and spaces in whitespace', () => {
-    const input = `\t   
+    const input = `\t
 \t   |hello
 \t   |world
 \t   `;
@@ -95,16 +95,16 @@ describe('cleanstring', () => {
 
   test('preserves content after pipe prefix', () => {
     const input = `
-        |  hello  world  
+        |  hello  world
         |    indented content
     `;
-    expect(cleanstring(input)).toBe(' hello  world  \n   indented content');
+    expect(cleanstring(input)).toBe('  hello  world\n    indented content');
   });
 
   test('handles only whitespace input', () => {
     const input = `
-        
-            
+
+
     `;
     expect(cleanstring(input)).toBe('');
   });
@@ -117,11 +117,11 @@ describe('cleanstring', () => {
   test('handles multiple consecutive whitespace lines in middle', () => {
     const input = `
         |first
-        
-        
+
+
         |last
     `;
-    expect(cleanstring(input)).toBe('first\n        \n        \nlast');
+    expect(cleanstring(input)).toBe('first\n\n\nlast');
   });
 
   describe('custom prefix characters', () => {
@@ -132,7 +132,7 @@ describe('cleanstring', () => {
           > and proper formatting
       `;
       expect(cleanstring(input, { prefix: '>' })).toBe(
-        'This is a quote\nwith multiple lines\nand proper formatting',
+        ' This is a quote\n with multiple lines\n and proper formatting',
       );
     });
 
@@ -141,7 +141,7 @@ describe('cleanstring', () => {
           # This is a comment
           # with multiple lines
       `;
-      expect(cleanstring(input, { prefix: '#' })).toBe('This is a comment\nwith multiple lines');
+      expect(cleanstring(input, { prefix: '#' })).toBe(' This is a comment\n with multiple lines');
     });
 
     test('handles * prefix for lists', () => {
@@ -150,7 +150,7 @@ describe('cleanstring', () => {
           * Second item
           * Third item
       `;
-      expect(cleanstring(input, { prefix: '*' })).toBe('First item\nSecond item\nThird item');
+      expect(cleanstring(input, { prefix: '*' })).toBe(' First item\n Second item\n Third item');
     });
 
     test('handles - prefix for dashes', () => {
@@ -158,7 +158,7 @@ describe('cleanstring', () => {
           - Item one
           - Item two
       `;
-      expect(cleanstring(input, { prefix: '-' })).toBe('Item one\nItem two');
+      expect(cleanstring(input, { prefix: '-' })).toBe(' Item one\n Item two');
     });
 
     test('handles custom prefix with internal whitespace', () => {
@@ -167,7 +167,7 @@ describe('cleanstring', () => {
           >
           > Third line
       `;
-      expect(cleanstring(input, { prefix: '>' })).toBe('First line\n\nThird line');
+      expect(cleanstring(input, { prefix: '>' })).toBe(' First line\n\n Third line');
     });
 
     test('handles mixed lines with custom prefix', () => {
@@ -177,7 +177,29 @@ describe('cleanstring', () => {
           > another prefixed line
       `;
       expect(cleanstring(input, { prefix: '>' })).toBe(
-        'prefixed line\n          unprefixed line\nanother prefixed line',
+        ' prefixed line\n          unprefixed line\n another prefixed line',
+      );
+    });
+
+    test('using "> " prefix strips first space (reproduces old behavior)', () => {
+      const input = `
+          > This is a quote
+          > with multiple lines
+          > and proper formatting
+      `;
+      expect(cleanstring(input, { prefix: '> ' })).toBe(
+        'This is a quote\nwith multiple lines\nand proper formatting',
+      );
+    });
+
+    test('using "| " prefix strips first space for pipe content', () => {
+      const input = `
+          | hello  world
+          |    no space after pipe
+          | another  line  with  spaces
+      `;
+      expect(cleanstring(input, { prefix: '| ' })).toBe(
+        'hello  world\n   no space after pipe\nanother  line  with  spaces',
       );
     });
 

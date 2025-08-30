@@ -89,12 +89,8 @@ function parseLine(line: string, prefix: string): { isWhitespace: boolean; prefi
   }
 
   // Check for prefix after whitespace
-  if (line[prefixLength] === prefix) {
-    prefixLength++;
-    // Also strip one space after the prefix if it exists
-    if (prefixLength < line.length && line[prefixLength] === ' ') {
-      prefixLength++;
-    }
+  if (line.substring(prefixLength, prefixLength + prefix.length) === prefix) {
+    prefixLength += prefix.length;
   } else {
     // No prefix found, don't strip any whitespace
     prefixLength = 0;
