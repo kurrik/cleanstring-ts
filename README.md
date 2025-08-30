@@ -179,16 +179,49 @@ npm run build
 npm run format
 ```
 
-### Publishing
+### Releases
 
-```bash
-# Update version and publish
-npm version patch  # 1.0.0 -> 1.0.1
-npm version minor  # 1.0.1 -> 1.1.0
-npm version major  # 1.1.0 -> 2.0.0
+Releases are automated via GitHub Actions. Only the repository owner can create releases.
 
-npm publish
-```
+#### Prerequisites (one-time setup)
+
+1. **Create Fine-Grained Personal Access Token**:
+   - Go to GitHub.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens
+   - Click "Generate new token"
+   - Set Resource owner to your account
+   - Set Repository access to "Selected repositories" and choose this repo
+   - Set expiration (recommend 1 year)
+   - **Required permissions**:
+     - Contents: Read and write
+     - Metadata: Read
+     - Pull requests: Read
+     - Actions: Read
+
+2. **Add Repository Secrets**:
+   - Go to repository → Settings → Secrets and variables → Actions
+   - Add `ADMIN_TOKEN` with your personal access token
+   - Add `NPM_TOKEN` with your npm automation token
+
+#### Creating a Release
+
+1. Go to your repository on GitHub
+2. Navigate to **Actions** tab
+3. Click on **"Release"** workflow in the left sidebar
+4. Click **"Run workflow"** button
+5. Select the version bump type from the dropdown:
+   - **patch**: 1.0.0 → 1.0.1 (bug fixes)
+   - **minor**: 1.0.0 → 1.1.0 (new features)
+   - **major**: 1.0.0 → 2.0.0 (breaking changes)
+6. Click **"Run workflow"** to start the release process
+
+The automated release process:
+
+1. **Runs all CI checks** (lint, test, build)
+2. **Updates package.json version**
+3. **Commits and pushes to main** (bypasses branch protection)
+4. **Creates and pushes git tag**
+5. **Creates GitHub release**
+6. **Automatically publishes to npm** (triggered by release creation)
 
 ## License
 
